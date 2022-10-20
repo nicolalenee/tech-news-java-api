@@ -2,14 +2,15 @@ package com.technews.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
-import org.springframework.data.annotation.Id;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name ="user")
+@Table(name = "post")
 public class Post implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

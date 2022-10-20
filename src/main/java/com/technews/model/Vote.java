@@ -1,32 +1,27 @@
 package com.technews.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "comment")
-public class Comment implements Serializable {
+@Table(name = "vote")
+public class Vote implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String commentText;
     private Integer userId;
     private Integer postId;
 
-    public Comment() {
+    public Vote() {
 
     }
 
-    public Comment(Integer id, String commentText, Integer userId, Integer postId) {
+    public Vote(Integer id, Integer userId, Integer postId) {
         this.id = id;
-        this.commentText = commentText;
         this.userId = userId;
         this.postId = postId;
     }
@@ -37,14 +32,6 @@ public class Comment implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getCommentText() {
-        return commentText;
-    }
-
-    public void setCommentText(String commentText) {
-        this.commentText = commentText;
     }
 
     public Integer getUserId() {
@@ -66,19 +53,17 @@ public class Comment implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Comment)) return false;
-        Comment comment = (Comment) o;
-        return Objects.equals(getId(), comment.getId()) &&
-                Objects.equals(getCommentText(), comment.getCommentText()) &&
-                Objects.equals(getUserId(), comment.getUserId()) &&
-                Objects.equals(getPostId(), comment.getPostId());
+        if (!(o instanceof Vote)) return false;
+        Vote vote = (Vote) o;
+        return Objects.equals(getId(), vote.getId()) &&
+                Objects.equals(getUserId(), vote.getUserId()) &&
+                Objects.equals(getPostId(), vote.getPostId());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
                 getId(),
-                getCommentText(),
                 getUserId(),
                 getPostId()
         );
@@ -86,9 +71,8 @@ public class Comment implements Serializable {
 
     @Override
     public String toString() {
-        return "Comment{" +
+        return "Vote{" +
                 "id=" + id +
-                ", commentText='" + commentText + '\'' +
                 ", userId=" + userId +
                 ", postId=" + postId +
                 '}';
