@@ -1,7 +1,7 @@
 package com.technews.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.Id;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -12,38 +12,37 @@ import java.util.Objects;
 @Table(name = "user")
 public class User implements Serializable {
 
-    @Id//signals that id will be used as a unique identifier
-    @GeneratedValue(strategy = GenerationType.AUTO) //denotes that the id will be a generated value
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String username;
-    @Column(unique = true) // signal that this value must be unique
+    @Column(unique = true)
     private String email;
     private String password;
-    @Transient // this data is NOT to be persisted in the database
+    @Transient
     boolean loggedIn;
 
-    // create table relationships automatically
-
-    //use FetchType.EAGER to gather all of its necessary information immediately after being created
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Post> posts;
-    // need to use FetchTYpe.LAZY to resolve multiple bags exception, grab information when needed
+
+    // Need to use FetchType.LAZY to resolve multiple bags exception
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Vote> votes;
-    // need to use FetchType.LAZY to resolve multiple bags exception, grab information when needed
+
+    // Need to use FetchType.LAZY to resolve multiple bags exception
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> comments;
 
     public User() {
-
     }
-    // constructor
+
     public User(Integer id, String username, String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
     }
+
 
     public Integer getId() {
         return id;
@@ -126,16 +125,7 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                getId(),
-                getUsername(),
-                getEmail(),
-                getPassword(),
-                isLoggedIn(),
-                getPosts(),
-                getVotes(),
-                getComments()
-        );
+        return Objects.hash(getId(), getUsername(), getEmail(), getPassword(), isLoggedIn(), getPosts(), getVotes(), getComments());
     }
 
     @Override

@@ -1,10 +1,7 @@
 package com.technews.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,6 +10,7 @@ import java.util.Objects;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "comment")
 public class Comment implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -21,7 +19,6 @@ public class Comment implements Serializable {
     private Integer postId;
 
     public Comment() {
-
     }
 
     public Comment(Integer id, String commentText, Integer userId, Integer postId) {
@@ -76,12 +73,7 @@ public class Comment implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                getId(),
-                getCommentText(),
-                getUserId(),
-                getPostId()
-        );
+        return Objects.hash(getId(), getCommentText(), getUserId(), getPostId());
     }
 
     @Override
