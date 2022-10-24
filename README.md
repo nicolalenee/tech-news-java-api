@@ -12,8 +12,10 @@ A web application that allows users to create posts about technology related top
 * JAVA
 * SQL and MySQL Driver
 * Spring Boot
+* Spring Data JPA
 * bcrypt 
 * Maven
+* Thymeleaf
 
 ## Installation & Requirements
 To run the application locally, Java must be installed on the machine. It is recommened to use an IDE that has been optimized for Java application development, such as [IntelliJ IDEA CE](https://www.jetbrains.com/idea/download/). Once that's been done, run the `TechNewsJavaApiApplication.java` file to start the program.
